@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+       <h1>{{a}}</h1>
+       <button v-on:click="changeA">changeA</button>
+       <h2 v-html="b"></h2>
+       <input type="text" v-model="b">
+    </div>
+</body>
+<script src="./Watcher.js"></script>
+<script src="./Compile.js"></script>
+<script src="./Dep.js"></script>
+<script src="./Observe.js"></script>
+<script src="./MVVM.js"></script>
+<script>
+var vue = new MVVM({
+    el: '#root',
+    data: {
+        a: 'hello',
+        b: 'world'
+    },
+    methods: {
+        changeA () {
+            this.a = 'hi'
+        }
+    }
+})
+</script>
+</html>
