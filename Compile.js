@@ -3,8 +3,18 @@ class Compile {
     this.$el = this.isElementNode(el) ? el : document.querySelector(el);
     this.$vm = vm;
     if (this.$el) {
-      this.compileElement(this.$el);
+      this.$fragment = this.nodeFragment(this.$el);
+      this.compileElement(this.$fragment);
+      this.$el.appendChild(this.$fragment);
     }
+  }
+  nodeFragment (el) {
+    let fragment = document.createDocumentFragment();
+    let child;
+    while (child = el.firstChild) {
+      fragment.appendChild(child);
+    }
+    return fragment;
   }
   compileElement (el) {
     var childNodes = Array.from(el.childNodes);
@@ -66,7 +76,6 @@ class Compile {
     } else if (dir === 'html') {
       node.innerHTML = vm[exp];
     } else if (dir === 'value') {
-      console.log('sss')
       node.value = vm[exp];
     }
     new Watcher(exp, vm, function () {

@@ -4,7 +4,6 @@ function observe (obj, vm) {
 }
 class Observer {
     constructor(obj, vm) {
-        this.$vm = vm;
         this.walk(obj, vm);
         this.dep = new Dep();
     }
@@ -15,6 +14,7 @@ class Observer {
                 configurable: true,
                 enumerable: true,
                 get () {
+                    // 当获取vm 的值的时候，如果 Dep 有 target 时执行，目的是将 Watcher 抓过来
                     if (Dep.target) {
                         self.dep.depend();
                     }

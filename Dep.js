@@ -13,7 +13,7 @@ class Dep {
     })
   }
   depend (sub) {
-    Dep.target.addDep(this, sub);
+    Dep.target.addDep(this);
   }
 }
 Dep.target = null;
